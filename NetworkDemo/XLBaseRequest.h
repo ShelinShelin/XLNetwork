@@ -39,7 +39,7 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
 
 #pragma mark - XLRequestAccessory   请求过程回调
 
-//加载动画
+//插件机制
 @protocol XLRequestAccessory <NSObject>
 
 @optional
@@ -73,6 +73,9 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
 
 @property (nonatomic, copy) XLRequestFailureBlcok failureCompletionBlock;
 
+/**
+ 
+ */
 @property (nonatomic, strong) NSMutableArray *requestAccessories;
 
 #pragma mark - public
@@ -85,6 +88,11 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
                                     failure:(XLRequestFailureBlcok)failure;
 
 - (void)clearCompletionBlock;
+
+/**
+ 添加遵循XLRequestAccessory协议的对象到数组
+ */
+- (void)addAccessory:(id<XLRequestAccessory>)accessory;
 
 #pragma mark - override for subclass
 

@@ -8,26 +8,39 @@
 
 #import "XLBaseRequest.h"
 #import "XLNetworkAgent.h"
+#import "XLNetworkPrivate.h"
 
 @implementation XLBaseRequest
 
 #pragma mark - public
 
 - (void)start {
-
+    [self accessoriesWillStartCallBack];
+    
     [[XLNetworkAgent sharedInstance] addRequest:self];
 }
 
 - (void)stop {
+    [self accessoriesWillStopCallBack];
     
     self.delegate = nil;
     [[XLNetworkAgent sharedInstance] cancelRequest:self];
+    
+    [self accessoriesDidStopCallBack];
 }
 
 - (void)clearCompletionBlock {
     // nil out to break the retain cycle.
     self.successCompletionBlock = nil;
     self.failureCompletionBlock = nil;
+}
+
+- (void)startWithCompletionBlockWithSuccess:(XLRequestSuccessBlock)success
+                                    failure:(XLRequestFailureBlcok)failure {
+    self.successCompletionBlock = success;
+    self.failureCompletionBlock = failure;
+    
+    [self start];
 }
 
 #pragma mark - getter
@@ -121,6 +134,14 @@
     }
 }
 
+#pragma mark - Request Accessoies
+
+- (void)addAccessory:(id<XLRequestAccessory>)accessory {
+    if (!self.requestAccessories) {
+        self.requestAccessories = [NSMutableArray array];
+    }
+    [self.requestAccessories addObject:accessory];
+}
 
 
 @end

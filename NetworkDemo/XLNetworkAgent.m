@@ -7,6 +7,7 @@
 //
 
 #import "XLNetworkAgent.h"
+#import "XLNetworkPrivate.h"
 
 @implementation XLNetworkAgent {
     NSMutableDictionary *_requestsRecord;   //key：NSURLSessionDataTask哈希字符串  value：XLBaseRequest
@@ -135,8 +136,9 @@
         if ([request statusCodeValidator]) {    //请求成功
             
             //调用动画插件
-            
+            [request accessoriesWillStopCallBack];
             [request requestCompleteHandler];
+            
             if (request.delegate != nil) {
                 [request.delegate requestFinished:request];
             }
@@ -144,15 +146,20 @@
                 request.successCompletionBlock(request);
             }
             
+            [request accessoriesDidStopCallBack];
         } else {    //请求失败
             
+            [request accessoriesWillStopCallBack];
             [request requestFailedHandler];
+            
             if (request.delegate != nil) {
                 [request.delegate requestFailed:request];
             }
             if (request.failureCompletionBlock) {
                 request.failureCompletionBlock(request);
             }
+            
+            [request accessoriesDidStopCallBack];
         }
     }
     

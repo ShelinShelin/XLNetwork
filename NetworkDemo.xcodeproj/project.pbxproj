@@ -19,6 +19,7 @@
 		FD158A441CE1C61500BAEBB9 /* XLBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FD158A431CE1C61500BAEBB9 /* XLBaseRequest.m */; };
 		FD50CBF51CFD70E3006FD2A1 /* XLNetworkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = FD50CBF41CFD70E3006FD2A1 /* XLNetworkAgent.m */; };
 		FD50CBF81CFD8F7C006FD2A1 /* XLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FD50CBF71CFD8F7C006FD2A1 /* XLRequest.m */; };
+		FD50CBFB1CFD94BF006FD2A1 /* XLNetworkPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD50CBFA1CFD94BF006FD2A1 /* XLNetworkPrivate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,8 @@
 		FD50CBF41CFD70E3006FD2A1 /* XLNetworkAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLNetworkAgent.m; sourceTree = "<group>"; };
 		FD50CBF61CFD8F7C006FD2A1 /* XLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLRequest.h; sourceTree = "<group>"; };
 		FD50CBF71CFD8F7C006FD2A1 /* XLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLRequest.m; sourceTree = "<group>"; };
+		FD50CBF91CFD94BF006FD2A1 /* XLNetworkPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLNetworkPrivate.h; sourceTree = "<group>"; };
+		FD50CBFA1CFD94BF006FD2A1 /* XLNetworkPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLNetworkPrivate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +186,8 @@
 				FD158A431CE1C61500BAEBB9 /* XLBaseRequest.m */,
 				FD50CBF31CFD70E3006FD2A1 /* XLNetworkAgent.h */,
 				FD50CBF41CFD70E3006FD2A1 /* XLNetworkAgent.m */,
+				FD50CBF91CFD94BF006FD2A1 /* XLNetworkPrivate.h */,
+				FD50CBFA1CFD94BF006FD2A1 /* XLNetworkPrivate.m */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -370,6 +375,7 @@
 			files = (
 				FD158A161CE1C5B200BAEBB9 /* ViewController.m in Sources */,
 				FD158A131CE1C5B200BAEBB9 /* AppDelegate.m in Sources */,
+				FD50CBFB1CFD94BF006FD2A1 /* XLNetworkPrivate.m in Sources */,
 				FD158A441CE1C61500BAEBB9 /* XLBaseRequest.m in Sources */,
 				FD50CBF81CFD8F7C006FD2A1 /* XLRequest.m in Sources */,
 				FD158A101CE1C5B200BAEBB9 /* main.m in Sources */,
