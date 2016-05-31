@@ -1,0 +1,142 @@
+//
+//  XLBaseRequest.h
+//  NetworkDemo
+//
+//  Created by Shelin on 16/5/10.
+//  Copyright © 2016年 GreatGate. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+#import "AFNetworking.h"
+
+@class XLBaseRequest;
+
+typedef NS_ENUM(NSInteger , XLRequestMethod) {
+    XLRequestMethodGet = 0,
+    XLRequestMethodPost,
+};
+
+typedef NS_ENUM(NSInteger , XLRequestSerializerType) {
+    XLRequestSerializerTypeHTTP = 0,
+    XLRequestSerializerTypeJSON,
+};
+
+typedef void (^XLRequestSuccessBlock)(XLBaseRequest *request);
+typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
+
+#pragma mark - XLRequestDelegate    请求结果回调
+
+@protocol XLRequestDelegate <NSObject>
+
+@optional
+
+- (void)requestFinished:(XLBaseRequest *)request;
+- (void)requestFailed:(XLBaseRequest *)request;
+- (void)clearRequest;
+
+@end
+
+#pragma mark - XLRequestAccessory   请求过程回调
+
+//加载动画
+@protocol XLRequestAccessory <NSObject>
+
+@optional
+
+- (void)requestWillStart:(id)request;
+- (void)requestWillStop:(id)request;
+- (void)requestDidStop:(id)request;
+
+@end
+
+
+
+@interface XLBaseRequest : NSObject
+
+@property (nonatomic, strong) NSString *bsaeUrl;
+
+/// request delegate object
+@property (nonatomic, weak) id<XLRequestDelegate> delegate;
+
+@property (nonatomic, strong, readonly) NSDictionary *responseHeaders;
+
+@property (nonatomic, strong) NSURLSessionDataTask *sessionDataTask;
+
+//@property (nonatomic, strong, readonly) NSString *responseString;
+
+//@property (nonatomic, strong, readonly) id responseJSONObject;
+
+@property (nonatomic, readonly) NSInteger responseStatusCode;
+
+@property (nonatomic, copy) XLRequestSuccessBlock successCompletionBlock;
+
+@property (nonatomic, copy) XLRequestFailureBlcok failureCompletionBlock;
+
+@property (nonatomic, strong) NSMutableArray *requestAccessories;
+
+#pragma mark - public
+
+- (void)start;
+
+- (void)stop;
+
+- (void)startWithCompletionBlockWithSuccess:(XLRequestSuccessBlock)success
+                                    failure:(XLRequestFailureBlcok)failure;
+
+- (void)clearCompletionBlock;
+
+#pragma mark - override for subclass
+
+/**
+ 请求成功的回调
+ */
+- (void)requestCompleteHandler;
+
+/**
+ 请求失败的回调
+ */
+- (void)requestFailedHandler;
+
+/**
+ 请求的URL
+ */
+- (NSString *)requestUrl;
+
+/**
+ 请求的BaseURL
+ */
+- (NSString *)baseUrl;
+
+/**
+ 请求的连接超时时间，默认为60秒
+ */
+- (NSTimeInterval)requestTimeoutInterval;
+
+/**
+ 请求的参数列表
+ */
+- (id)requestArgument;
+
+/**
+ Http请求的方法
+ */
+- (XLRequestMethod)requestMethod;
+
+/**
+ 请求的SerializerType
+ */
+- (XLRequestSerializerType)requestSerializerType;
+
+/**
+ 在HTTP报头添加的自定义参数
+ */
+- (NSDictionary *)requestHeaderFieldValueDictionary;
+
+
+/**
+ 用于检查Status Code是否正常的方法
+ */
+- (BOOL)statusCodeValidator;
+
+@end
