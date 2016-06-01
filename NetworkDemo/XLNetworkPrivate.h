@@ -21,4 +21,6 @@
 
 @interface XLNetworkPrivate : NSObject
 
++ (NSString*)responseObjectToJSONStr:(id)object;
+
 @end

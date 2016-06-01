@@ -11,7 +11,6 @@
 
 @implementation XLNetworkAgent {
     NSMutableDictionary *_requestsRecord;   //key：NSURLSessionDataTask哈希字符串  value：XLBaseRequest
-    
     AFHTTPSessionManager *_manager;
 }
 
@@ -83,7 +82,12 @@
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
+            [request setValue:responseObject forKey:@"responseJSONObject"];
+            [request setValue:[XLNetworkPrivate responseObjectToJSONStr:responseObject] forKey:@"responseString"];
+            [self handleRequestResult:task];
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self handleRequestResult:task];
             
         }];
     }else if (method == XLRequestMethodPost) {  //POST
@@ -92,7 +96,12 @@
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
+            [request setValue:responseObject forKey:@"responseJSONObject"];
+            [request setValue:[XLNetworkPrivate responseObjectToJSONStr:responseObject] forKey:@"responseString"];
+            [self handleRequestResult:task];
+            
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            [self handleRequestResult:task];
             
         }];
     }
@@ -107,6 +116,7 @@
     if (self) {
         _requestsRecord = [NSMutableDictionary dictionary];
         _manager = [AFHTTPSessionManager manager];
+        _requestsRecord = [NSMutableDictionary dictionary];
     }
     return self;
 }

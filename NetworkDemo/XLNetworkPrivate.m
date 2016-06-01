@@ -10,6 +10,14 @@
 
 @implementation XLNetworkPrivate
 
++ (NSString*)responseObjectToJSONStr:(id)object {
+    
+    NSError *parseError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:object options:NSJSONWritingPrettyPrinted error:&parseError];
+    
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
 @end
 
 @implementation XLBaseRequest (RequestAccessory)

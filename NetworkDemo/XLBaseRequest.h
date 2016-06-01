@@ -57,24 +57,24 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
 @property (nonatomic, strong) NSString *bsaeUrl;
 
 /// request delegate object
-@property (nonatomic, weak) id<XLRequestDelegate> delegate;
+@property (nonatomic, weak) id <XLRequestDelegate> delegate;
 
 @property (nonatomic, strong, readonly) NSDictionary *responseHeaders;
 
 @property (nonatomic, strong) NSURLSessionDataTask *sessionDataTask;
 
-//@property (nonatomic, strong, readonly) NSString *responseString;
+@property (nonatomic, strong, readonly) NSString *responseString;
 
-//@property (nonatomic, strong, readonly) id responseJSONObject;
+@property (nonatomic, strong, readonly) id responseJSONObject;
 
-@property (nonatomic, readonly) NSInteger responseStatusCode;
+@property (nonatomic, assign, readonly) NSInteger responseStatusCode;
 
 @property (nonatomic, copy) XLRequestSuccessBlock successCompletionBlock;
 
 @property (nonatomic, copy) XLRequestFailureBlcok failureCompletionBlock;
 
 /**
- 
+ 存放遵循代理的对象，插件
  */
 @property (nonatomic, strong) NSMutableArray *requestAccessories;
 

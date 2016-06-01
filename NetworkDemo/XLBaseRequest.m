@@ -105,7 +105,7 @@
  Http请求的方法
  */
 - (XLRequestMethod)requestMethod {
-    return XLRequestMethodGet;
+    return XLRequestMethodGet;  //默认GET
 }
 
 /**
