@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "XLBaseRequest.h"
+#import "XLChainRequest.h"
 
 @interface XLNetworkPrivate : NSObject
 
@@ -30,4 +31,12 @@
 - (void)accessoriesDidStopCallBack;
 
 @end
+
+#pragma mark - YTKChainRequest 分类
+
+@interface XLChainRequest (RequestAccessory)
+
+- (void)accessoriesWillStartCallBack;
+- (void)accessoriesWillStopCallBack;
+- (void)accessoriesDidStopCallBack;
 
