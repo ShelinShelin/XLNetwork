@@ -66,7 +66,7 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
 
 @interface XLBaseRequest : NSObject
 
-@property (nonatomic, strong) NSString *bsaeUrl;
+@property (nonatomic, strong) NSString *baseUrl;
 
 /** request delegate object */
 @property (nonatomic, weak) id <XLRequestDelegate> delegate;
