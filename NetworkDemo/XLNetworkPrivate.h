@@ -40,3 +40,5 @@
 - (void)accessoriesWillStopCallBack;
 - (void)accessoriesDidStopCallBack;
 
+@end
+
