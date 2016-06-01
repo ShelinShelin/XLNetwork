@@ -9,11 +9,13 @@
 #import "ViewController.h"
 #import "GetListApi.h"
 
-@interface ViewController ()
+@interface ViewController () <XLRequestDelegate, XLRequestAccessory>
 
 @end
 
-@implementation ViewController
+@implementation ViewController {
+    NSInteger _currentPage;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,14 +24,49 @@
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    GetListApi *api = [[GetListApi alloc] initWithCityId:@"1" page:@0];
     
+    GetListApi *api = [[GetListApi alloc] initWithCityId:@"1" page:@1];
+    
+    api.delegate = self;
+//    [api addAccessory:self];
+    [api start];
+    
+    _currentPage++;
+    
+    /*
     [api startWithCompletionBlockWithSuccess:^(XLBaseRequest *request) {
-        NSLog(@"------ %ld --------", request.responseStatusCode);
+        XLLog(@"------ %ld --------", request.responseStatusCode);
     } failure:^(XLBaseRequest *request) {
         
     }];
+     */
+}
 
+
+
+#pragma mark - XLRequestDelegate
+
+- (void)requestFinished:(XLBaseRequest *)request {
+    
+    XLLog(@"------ %@ --------", [request requestArgument]);
+}
+
+- (void)requestFailed:(XLBaseRequest *)request {
+
+}
+
+#pragma mark - XLRequestAccessory
+
+- (void)requestWillStart:(id)request {
+    XLLog(@"requestWillStart");
+}
+
+- (void)requestWillStop:(id)request {
+    XLLog(@"requestWillStop");
+}
+
+- (void)requestDidStop:(id)request {
+    XLLog(@"requestDidStop");
 }
 
 @end

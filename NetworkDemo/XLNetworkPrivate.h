@@ -9,6 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "XLBaseRequest.h"
 
+@interface XLNetworkPrivate : NSObject
+
++ (NSString*)responseObjectToJSONStr:(id)object;
+
++ (NSString *)md5StringFromString:(NSString *)string;
+
++ (void)addDoNotBackupAttribute:(NSString *)path;
+
++ (NSString *)appVersionString;
+
+@end
+
 #pragma mark - YTKBaseRequest 分类
 
 @interface XLBaseRequest (RequestAccessory)    //插件机制
@@ -19,8 +31,3 @@
 
 @end
 
-@interface XLNetworkPrivate : NSObject
-
-+ (NSString*)responseObjectToJSONStr:(id)object;
-
-@end

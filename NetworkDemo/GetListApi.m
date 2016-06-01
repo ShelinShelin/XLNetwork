@@ -21,9 +21,12 @@
     return self;
 }
 
-//?cityId=1&page=0"
+- (NSString *)baseUrl {
+    return @"https://api.108tian.com";
+}
+
 - (NSString *)requestUrl {
-    return @"https://api.108tian.com/mobile/v3/Home";
+    return @"/mobile/v3/Home";
 }
 
 - (id)requestArgument {
@@ -31,6 +34,17 @@
              @"cityId" : _cityId,
              @"page" : _page
              };
+}
+
+- (id)treatedDataObject {
+    
+    XLLog(@"----- treating 处理JSON数据 -------");
+    
+    return self.responseString;
+}
+
+- (NSInteger)cacheTimeInSeconds {
+    return 10;
 }
 
 @end

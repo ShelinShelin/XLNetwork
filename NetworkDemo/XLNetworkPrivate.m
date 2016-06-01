@@ -7,6 +7,7 @@
 //
 
 #import "XLNetworkPrivate.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @implementation XLNetworkPrivate
 
@@ -18,7 +19,39 @@
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
++ (NSString *)md5StringFromString:(NSString *)string {
+    if(string == nil || [string length] == 0)
+        return nil;
+    
+    const char *value = [string UTF8String];
+    
+    unsigned char outputBuffer[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(value, (CC_LONG)strlen(value), outputBuffer);
+    
+    NSMutableString *outputString = [[NSMutableString alloc] initWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    for(NSInteger count = 0; count < CC_MD5_DIGEST_LENGTH; count++){
+        [outputString appendFormat:@"%02x",outputBuffer[count]];
+    }
+    
+    return outputString;
+}
+
++ (void)addDoNotBackupAttribute:(NSString *)path {
+    NSURL *url = [NSURL fileURLWithPath:path];
+    NSError *error = nil;
+    [url setResourceValue:[NSNumber numberWithBool:YES] forKey:NSURLIsExcludedFromBackupKey error:&error];
+    if (error) {
+        XLLog(@"error to set do not backup attribute, error = %@", error);
+    }
+}
+
++ (NSString *)appVersionString {
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+}
+
 @end
+
+
 
 @implementation XLBaseRequest (RequestAccessory)
 
@@ -27,6 +60,7 @@
 - (void)accessoriesWillStartCallBack {
     
     for (id<XLRequestAccessory> accessory in self.requestAccessories) {
+        
         if ([accessory respondsToSelector:@selector(requestWillStart:)]) {
             [accessory requestWillStart:self];
         }

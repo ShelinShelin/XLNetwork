@@ -8,6 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *日志输出
+ */
+#ifdef DEBUG
+
+#define XLLog(...) NSLog(__VA_ARGS__)
+
+#else
+
+#define XLLog(...)
+
+#endif
+
+
 #import "AFNetworking.h"
 
 @class XLBaseRequest;
@@ -50,32 +64,35 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
 
 @end
 
-
-
 @interface XLBaseRequest : NSObject
 
 @property (nonatomic, strong) NSString *bsaeUrl;
 
-/// request delegate object
+/** request delegate object */
 @property (nonatomic, weak) id <XLRequestDelegate> delegate;
 
+/** 请求头 */
 @property (nonatomic, strong, readonly) NSDictionary *responseHeaders;
 
 @property (nonatomic, strong) NSURLSessionDataTask *sessionDataTask;
 
+/** JSON数据字符串 */
 @property (nonatomic, strong, readonly) NSString *responseString;
 
+/** JSON对象 */
 @property (nonatomic, strong, readonly) id responseJSONObject;
 
+/** 处理过后的JSON数据（模型化/格式化） */
+@property (nonatomic, strong, readonly) id treatedDataObject;
+
+/** HTTP状态码 */
 @property (nonatomic, assign, readonly) NSInteger responseStatusCode;
 
 @property (nonatomic, copy) XLRequestSuccessBlock successCompletionBlock;
 
 @property (nonatomic, copy) XLRequestFailureBlcok failureCompletionBlock;
 
-/**
- 存放遵循代理的对象，插件
- */
+/** 存放遵循代理的对象，插件 */
 @property (nonatomic, strong) NSMutableArray *requestAccessories;
 
 #pragma mark - public
@@ -140,6 +157,11 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
  在HTTP报头添加的自定义参数
  */
 - (NSDictionary *)requestHeaderFieldValueDictionary;
+
+/**
+ 处理请求返回的原始数据
+ */
+- (id)treatedDataObject;
 
 
 /**

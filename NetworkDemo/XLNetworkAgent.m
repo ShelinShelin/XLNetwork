@@ -70,7 +70,7 @@
             if ([httpHeaderField isKindOfClass:[NSString class]] && [value isKindOfClass:[NSString class]]) {
                 [_manager.requestSerializer setValue:(NSString *)value forHTTPHeaderField:(NSString *)httpHeaderField];
             } else {
-                NSLog(@"Error, class of key/value in headerFieldValueDictionary should be NSString.");
+                XLLog(@"Error, class of key/value in headerFieldValueDictionary should be NSString.");
             }
         }
     }
@@ -197,7 +197,7 @@
     @synchronized(self) {   //加锁，线程安全
         [_requestsRecord removeObjectForKey:key];
     }
-    NSLog(@"Request queue size = %lu", (unsigned long)[_requestsRecord count]);
+    XLLog(@"Request queue size = %lu", (unsigned long)[_requestsRecord count]);
 }
 
 //哈希
@@ -205,9 +205,5 @@
     NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[sessionDataTask hash]];
     return key;
 }
-
-
-
-
 
 @end

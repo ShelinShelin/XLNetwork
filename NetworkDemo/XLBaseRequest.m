@@ -51,7 +51,6 @@
 }
 
 - (NSInteger)responseStatusCode {
-    
     NSHTTPURLResponse *response = (NSHTTPURLResponse *)self.sessionDataTask.response;
     return response.statusCode;
 }
@@ -112,7 +111,7 @@
  请求的SerializerType
  */
 - (XLRequestSerializerType)requestSerializerType {
-    return XLRequestSerializerTypeJSON;
+    return XLRequestSerializerTypeJSON;   //默认JSON
 }
 
 /**
@@ -134,9 +133,13 @@
     }
 }
 
+- (id)treatedDataObject {
+    return self.responseJSONObject;    //默认返回原始数据
+}
+
 #pragma mark - Request Accessoies
 
-- (void)addAccessory:(id<XLRequestAccessory>)accessory {
+- (void)addAccessory:(id <XLRequestAccessory>)accessory {
     if (!self.requestAccessories) {
         self.requestAccessories = [NSMutableArray array];
     }

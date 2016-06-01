@@ -10,7 +10,7 @@
 
 @interface XLRequest : XLBaseRequest
 
-@property (nonatomic) BOOL ignoreCache;
+@property (nonatomic, assign) BOOL ignoreCache;
 
 /**
  返回当前缓存的对象
@@ -23,12 +23,7 @@
 - (BOOL)isDataFromCache;
 
 /**
- 返回是否当前缓存需要更新
- */
-- (BOOL)isCacheVersionExpired;
-
-/**
- 强制更新缓存
+ 强制更新缓存，发起网络请求
  */
 - (void)startWithoutCache;
 
@@ -38,14 +33,10 @@
 - (void)saveJsonResponseToCacheFile:(id)jsonResponse;
 
 // For subclass to overwrite
+
 /**
- 缓存有效时间
+ 缓存有效时间，单位s
  */
 - (NSInteger)cacheTimeInSeconds;
-
-- (long long)cacheVersion;
-
-//- (id)cacheSensitiveData;
-
 
 @end
