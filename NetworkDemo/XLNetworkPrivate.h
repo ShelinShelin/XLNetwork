@@ -32,7 +32,7 @@
 
 @end
 
-#pragma mark - YTKChainRequest 分类
+#pragma mark - XLChainRequest 分类
 
 @interface XLChainRequest (RequestAccessory)
 

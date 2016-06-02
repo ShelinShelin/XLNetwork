@@ -163,7 +163,6 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
  */
 - (id)treatedDataObject;
 
-
 /**
  用于检查Status Code是否正常的方法
  */

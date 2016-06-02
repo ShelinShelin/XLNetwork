@@ -45,9 +45,6 @@ typedef void (^ChainCallback)(XLChainRequest *chainRequest, XLBaseRequest *baseR
 
 - (NSArray *)requestArray;
 
-/**
- Request Accessory，可以hook Request的start和stop
- */
 - (void)addAccessory:(id<XLRequestAccessory>)accessory;
 
 
