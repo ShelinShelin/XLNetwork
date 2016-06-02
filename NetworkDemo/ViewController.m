@@ -25,7 +25,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
-    GetListApi *api = [[GetListApi alloc] initWithCityId:@"1" page:@1];
+    GetListApi *api = [[GetListApi alloc] initWithCityId:@"1" page:@(_currentPage)];
     
     api.delegate = self;
 //    [api addAccessory:self];
@@ -48,7 +48,7 @@
 
 - (void)requestFinished:(XLBaseRequest *)request {
     
-    XLLog(@"------ %@ --------", [request requestArgument]);
+    XLLog(@"------ %@ --------", request.responseJSONObject);
 }
 
 - (void)requestFailed:(XLBaseRequest *)request {

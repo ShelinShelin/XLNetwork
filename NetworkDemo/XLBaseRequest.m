@@ -111,7 +111,7 @@
  请求的SerializerType
  */
 - (XLRequestSerializerType)requestSerializerType {
-    return XLRequestSerializerTypeJSON;   //默认JSON
+    return XLRequestSerializerTypeHTTP;   //默认HTTP
 }
 
 /**

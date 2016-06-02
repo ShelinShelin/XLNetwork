@@ -158,7 +158,7 @@
     
     // check cache existance
     NSString *path = [self cacheFilePath];  //
-    XLLog(@"==== %@", path);
+    
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:path isDirectory:nil]) {
         //根据文件路径，验证缓存是否存在，不存在 -> 网络请求
