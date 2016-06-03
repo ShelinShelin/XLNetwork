@@ -84,8 +84,8 @@
             if (responseObject) {
                 [request setValue:responseObject forKey:@"responseJSONObject"];
                 [request setValue:[XLNetworkPrivate responseObjectToJSONStr:responseObject] forKey:@"responseString"];
-                [self handleRequestResult:task];
             }
+            [self handleRequestResult:task];
 
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self handleRequestResult:task];
@@ -99,8 +99,8 @@
             if (responseObject) {
                 [request setValue:responseObject forKey:@"responseJSONObject"];
                 [request setValue:[XLNetworkPrivate responseObjectToJSONStr:responseObject] forKey:@"responseString"];
-                [self handleRequestResult:task];
             }
+            [self handleRequestResult:task];
 
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self handleRequestResult:task];
