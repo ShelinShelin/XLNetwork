@@ -81,11 +81,12 @@
         request.sessionDataTask = [_manager GET:requestUrl parameters:param progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
-            [request setValue:responseObject forKey:@"responseJSONObject"];
-            [request setValue:[XLNetworkPrivate responseObjectToJSONStr:responseObject] forKey:@"responseString"];
-            [self handleRequestResult:task];
-            
+            if (responseObject) {
+                [request setValue:responseObject forKey:@"responseJSONObject"];
+                [request setValue:[XLNetworkPrivate responseObjectToJSONStr:responseObject] forKey:@"responseString"];
+                [self handleRequestResult:task];
+            }
+
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self handleRequestResult:task];
             
@@ -95,11 +96,12 @@
         request.sessionDataTask = [_manager POST:requestUrl parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
-            [request setValue:responseObject forKey:@"responseJSONObject"];
-            [request setValue:[XLNetworkPrivate responseObjectToJSONStr:responseObject] forKey:@"responseString"];
-            [self handleRequestResult:task];
-            
+            if (responseObject) {
+                [request setValue:responseObject forKey:@"responseJSONObject"];
+                [request setValue:[XLNetworkPrivate responseObjectToJSONStr:responseObject] forKey:@"responseString"];
+                [self handleRequestResult:task];
+            }
+
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             [self handleRequestResult:task];
             
