@@ -10,6 +10,15 @@
 #import "XLBaseRequest.h"
 #import "XLChainRequest.h"
 
+typedef NS_ENUM(NSInteger, XLNetworkReachabilityStatus) {
+    XLNetworkReachabilityWifi,
+    XLNetworkReachabilityUnknown,
+    XLNetworkReachabilityWWAN,
+    XLNetworkReachabilityNotReachable
+};
+
+
+
 @interface XLNetworkPrivate : NSObject
 
 + (NSString*)responseObjectToJSONStr:(id)object;
@@ -19,6 +28,10 @@
 + (void)addDoNotBackupAttribute:(NSString *)path;
 
 + (NSString *)appVersionString;
+;
++ (BOOL)checkNetworkStatus;
+
++ (XLNetworkReachabilityStatus)currentNetworkStatus;
 
 @end
 

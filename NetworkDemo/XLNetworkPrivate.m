@@ -11,6 +11,11 @@
 
 @implementation XLNetworkPrivate
 
++ (void)load {
+    AFNetworkReachabilityManager *reachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    [reachabilityManager startMonitoring];
+}
+
 + (NSString*)responseObjectToJSONStr:(id)object {
     
     NSError *parseError = nil;
@@ -47,6 +52,32 @@
 
 + (NSString *)appVersionString {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+}
+
++ (BOOL)checkNetworkStatus {
+    
+    XLNetworkReachabilityStatus status = [XLNetworkPrivate currentNetworkStatus];
+    
+    if (status == XLNetworkReachabilityNotReachable) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
++ (XLNetworkReachabilityStatus)currentNetworkStatus {
+    AFNetworkReachabilityManager *reachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    if (reachabilityManager.isReachable) {
+        if ([AFNetworkReachabilityManager sharedManager].isReachableViaWWAN) {
+            return XLNetworkReachabilityWWAN;
+        }
+        if (reachabilityManager.isReachableViaWiFi) {
+            return XLNetworkReachabilityWifi;
+        }
+        return XLNetworkReachabilityUnknown;
+    }else{
+        return XLNetworkReachabilityNotReachable;
+    }
 }
 
 @end
