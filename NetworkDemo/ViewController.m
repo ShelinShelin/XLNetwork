@@ -21,6 +21,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(networkStatusChange:)
+                                                 name:XLNetworkStatusChangeNotification
+                                               object:nil];
+    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -64,6 +69,18 @@
 
 - (void)requestDidStop:(id)request {
     XLLog(@"requestDidStop");
+}
+
+#pragma mark - XLNetworkStatusChangeNotification
+
+- (void)networkStatusChange:(NSNotification *)notif {
+    XLLog(@"-- %@ --", notif.object);
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:XLNetworkStatusChangeNotification
+                                                  object:nil];
 }
 
 @end

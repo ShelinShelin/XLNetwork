@@ -32,7 +32,9 @@
  */
 - (void)cancelAllRequests;
 
-/// 根据request构建url
+/**
+ 根据request构建url
+ */
 - (NSString *)buildRequestUrl:(XLBaseRequest *)request;
 
 @end

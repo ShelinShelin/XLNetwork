@@ -277,6 +277,7 @@
 				TargetAttributes = {
 					FD158A0A1CE1C5B200BAEBB9 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 6J2XGE456D;
 					};
 					FD158A231CE1C5B200BAEBB9 = {
 						CreatedOnToolsVersion = 7.3;
@@ -539,6 +540,7 @@
 			baseConfigurationReference = E26E7969A9BFC6F6BA645E75 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6J2XGE456D;
 				INFOPLIST_FILE = NetworkDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.greatgate.NetworkDemo;
@@ -551,6 +553,7 @@
 			baseConfigurationReference = F6AAB23BC00C18F074427767 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6J2XGE456D;
 				INFOPLIST_FILE = NetworkDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.greatgate.NetworkDemo;

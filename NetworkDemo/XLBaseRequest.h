@@ -24,6 +24,7 @@
 
 #import "AFNetworking.h"
 
+
 @class XLBaseRequest;
 
 typedef NS_ENUM(NSInteger , XLRequestMethod) {
@@ -101,8 +102,8 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
 
 - (void)stop;
 
-- (void)startWithCompletionBlockWithSuccess:(XLRequestSuccessBlock)success
-                                    failure:(XLRequestFailureBlcok)failure;
+- (void)startRequestWithSuccess:(XLRequestSuccessBlock)success
+                        failure:(XLRequestFailureBlcok)failure;
 
 - (void)clearCompletionBlock;
 

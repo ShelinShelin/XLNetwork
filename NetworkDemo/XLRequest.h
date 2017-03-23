@@ -7,6 +7,7 @@
 //
 
 #import "XLBaseRequest.h"
+#import "XLNetworkPrivate.h"
 
 @interface XLRequest : XLBaseRequest
 

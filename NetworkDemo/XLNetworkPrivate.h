@@ -11,11 +11,14 @@
 #import "XLChainRequest.h"
 
 typedef NS_ENUM(NSInteger, XLNetworkReachabilityStatus) {
-    XLNetworkReachabilityWifi,
-    XLNetworkReachabilityUnknown,
-    XLNetworkReachabilityWWAN,
-    XLNetworkReachabilityNotReachable
+    XLNetworkReachabilityUnknown = -1,
+    XLNetworkReachabilityNotReachable = 0,
+    XLNetworkReachabilityWWAN = 1,
+    XLNetworkReachabilityWifi = 2
 };
+
+// 监听网络状态通知
+static NSString *const XLNetworkStatusChangeNotification = @"NetworkDidChangeNotification";
 
 @interface XLNetworkPrivate : NSObject
 
@@ -26,6 +29,7 @@ typedef NS_ENUM(NSInteger, XLNetworkReachabilityStatus) {
 + (void)addDoNotBackupAttribute:(NSString *)path;
 
 + (NSString *)appVersionString;
+
 /**
  网络是否可用
  */
@@ -35,6 +39,11 @@ typedef NS_ENUM(NSInteger, XLNetworkReachabilityStatus) {
  获取当前网络状态
  */
 + (XLNetworkReachabilityStatus)currentNetworkStatus;
+
+/**
+ 获取设备型号
+ */
++ (NSString *)getCurrentDeviceModel;
 
 @end
 

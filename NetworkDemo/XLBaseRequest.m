@@ -35,7 +35,7 @@
     self.failureCompletionBlock = nil;
 }
 
-- (void)startWithCompletionBlockWithSuccess:(XLRequestSuccessBlock)success
+- (void)startRequestWithSuccess:(XLRequestSuccessBlock)success
                                     failure:(XLRequestFailureBlcok)failure {
     self.successCompletionBlock = success;
     self.failureCompletionBlock = failure;
