@@ -84,32 +84,33 @@
 
 
 
-@implementation XLBaseRequest (RequestAccessory)
+
+@implementation XLBaseRequest (requestPlugin)
 
 //从数组中取出遵循代理的对象，执行代理方法
 
-- (void)accessoriesWillStartCallBack {
+- (void)requestPluginWillStartCallBack {
     
-    for (id<XLRequestAccessory> accessory in self.requestAccessories) {
+    for (id<XLRequestPlugin> requestPlugin in self.requestPlugins) {
         
-        if ([accessory respondsToSelector:@selector(requestWillStart:)]) {
-            [accessory requestWillStart:self];
+        if ([requestPlugin respondsToSelector:@selector(requestWillStart:)]) {
+            [requestPlugin requestWillStart:self];
         }
     }
 }
 
-- (void)accessoriesWillStopCallBack {
-    for (id<XLRequestAccessory> accessory in self.requestAccessories) {
-        if ([accessory respondsToSelector:@selector(requestWillStop:)]) {
-            [accessory requestWillStop:self];
+- (void)requestPluginWillStopCallBack {
+    for (id<XLRequestPlugin> requestPlugin in self.requestPlugins) {
+        if ([requestPlugin respondsToSelector:@selector(requestWillStop:)]) {
+            [requestPlugin requestWillStop:self];
         }
     }
 }
 
-- (void)accessoriesDidStopCallBack {
-    for (id<XLRequestAccessory> accessory in self.requestAccessories) {
-        if ([accessory respondsToSelector:@selector(requestDidStop:)]) {
-            [accessory requestDidStop:self];
+- (void)requestPluginDidStopCallBack {
+    for (id<XLRequestPlugin> requestPlugin in self.requestPlugins) {
+        if ([requestPlugin respondsToSelector:@selector(requestDidStop:)]) {
+            [requestPlugin requestDidStop:self];
         }
     }
 }
@@ -119,28 +120,28 @@
 
 
 
-@implementation XLChainRequest (RequestAccessory)
+@implementation XLChainRequest (RequestPlugin)
 
-- (void)accessoriesWillStartCallBack {
-    for (id<XLRequestAccessory> accessory in self.requestAccessories) {
-        if ([accessory respondsToSelector:@selector(requestWillStart:)]) {
-            [accessory requestWillStart:self];
+- (void)requestPluginWillStartCallBack {
+    for (id<XLRequestPlugin> requestPlugin in self.requestPlugins) {
+        if ([requestPlugin respondsToSelector:@selector(requestWillStart:)]) {
+            [requestPlugin requestWillStart:self];
         }
     }
 }
 
-- (void)accessoriesWillStopCallBack {
-    for (id<XLRequestAccessory> accessory in self.requestAccessories) {
-        if ([accessory respondsToSelector:@selector(requestWillStop:)]) {
-            [accessory requestWillStop:self];
+- (void)requestPluginWillStopCallBack {
+    for (id<XLRequestPlugin> requestPlugin in self.requestPlugins) {
+        if ([requestPlugin respondsToSelector:@selector(requestWillStop:)]) {
+            [requestPlugin requestWillStop:self];
         }
     }
 }
 
-- (void)accessoriesDidStopCallBack {
-    for (id<XLRequestAccessory> accessory in self.requestAccessories) {
-        if ([accessory respondsToSelector:@selector(requestDidStop:)]) {
-            [accessory requestDidStop:self];
+- (void)requestPluginDidStopCallBack {
+    for (id<XLRequestPlugin> requestPlugin in self.requestPlugins) {
+        if ([requestPlugin respondsToSelector:@selector(requestDidStop:)]) {
+            [requestPlugin requestDidStop:self];
         }
     }
 }

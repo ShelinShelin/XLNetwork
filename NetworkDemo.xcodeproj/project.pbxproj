@@ -20,7 +20,7 @@
 		FD50CBF51CFD70E3006FD2A1 /* XLNetworkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = FD50CBF41CFD70E3006FD2A1 /* XLNetworkAgent.m */; };
 		FD50CBF81CFD8F7C006FD2A1 /* XLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FD50CBF71CFD8F7C006FD2A1 /* XLRequest.m */; };
 		FD50CBFB1CFD94BF006FD2A1 /* XLNetworkPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD50CBFA1CFD94BF006FD2A1 /* XLNetworkPrivate.m */; };
-		FD50CBFE1CFE794F006FD2A1 /* GetListApi.m in Sources */ = {isa = PBXBuildFile; fileRef = FD50CBFD1CFE794F006FD2A1 /* GetListApi.m */; };
+		FD50CBFE1CFE794F006FD2A1 /* GetListRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FD50CBFD1CFE794F006FD2A1 /* GetListRequest.m */; };
 		FD77E51C1CFECF5F0046B3AC /* XLChainRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FD77E5181CFECF5F0046B3AC /* XLChainRequest.m */; };
 		FD77E51D1CFECF5F0046B3AC /* XLChainRequestAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = FD77E51B1CFECF5F0046B3AC /* XLChainRequestAgent.m */; };
 /* End PBXBuildFile section */
@@ -70,8 +70,8 @@
 		FD50CBF71CFD8F7C006FD2A1 /* XLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLRequest.m; sourceTree = "<group>"; };
 		FD50CBF91CFD94BF006FD2A1 /* XLNetworkPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLNetworkPrivate.h; sourceTree = "<group>"; };
 		FD50CBFA1CFD94BF006FD2A1 /* XLNetworkPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLNetworkPrivate.m; sourceTree = "<group>"; };
-		FD50CBFC1CFE794F006FD2A1 /* GetListApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetListApi.h; sourceTree = "<group>"; };
-		FD50CBFD1CFE794F006FD2A1 /* GetListApi.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetListApi.m; sourceTree = "<group>"; };
+		FD50CBFC1CFE794F006FD2A1 /* GetListRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetListRequest.h; sourceTree = "<group>"; };
+		FD50CBFD1CFE794F006FD2A1 /* GetListRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetListRequest.m; sourceTree = "<group>"; };
 		FD77E5181CFECF5F0046B3AC /* XLChainRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLChainRequest.m; sourceTree = "<group>"; };
 		FD77E5191CFECF5F0046B3AC /* XLChainRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLChainRequest.h; sourceTree = "<group>"; };
 		FD77E51A1CFECF5F0046B3AC /* XLChainRequestAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLChainRequestAgent.h; sourceTree = "<group>"; };
@@ -151,8 +151,8 @@
 				FD158A121CE1C5B200BAEBB9 /* AppDelegate.m */,
 				FD158A141CE1C5B200BAEBB9 /* ViewController.h */,
 				FD158A151CE1C5B200BAEBB9 /* ViewController.m */,
-				FD50CBFC1CFE794F006FD2A1 /* GetListApi.h */,
-				FD50CBFD1CFE794F006FD2A1 /* GetListApi.m */,
+				FD50CBFC1CFE794F006FD2A1 /* GetListRequest.h */,
+				FD50CBFD1CFE794F006FD2A1 /* GetListRequest.m */,
 				FD158A0E1CE1C5B200BAEBB9 /* Supporting Files */,
 			);
 			path = NetworkDemo;
@@ -393,7 +393,7 @@
 				FD50CBFB1CFD94BF006FD2A1 /* XLNetworkPrivate.m in Sources */,
 				FD158A441CE1C61500BAEBB9 /* XLBaseRequest.m in Sources */,
 				FD50CBF81CFD8F7C006FD2A1 /* XLRequest.m in Sources */,
-				FD50CBFE1CFE794F006FD2A1 /* GetListApi.m in Sources */,
+				FD50CBFE1CFE794F006FD2A1 /* GetListRequest.m in Sources */,
 				FD77E51C1CFECF5F0046B3AC /* XLChainRequest.m in Sources */,
 				FD158A101CE1C5B200BAEBB9 /* main.m in Sources */,
 				FD50CBF51CFD70E3006FD2A1 /* XLNetworkAgent.m in Sources */,

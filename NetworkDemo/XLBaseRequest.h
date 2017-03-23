@@ -45,16 +45,16 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
 
 @optional
 
-- (void)requestFinished:(XLBaseRequest *)request;
+- (void)requestSucceed:(XLBaseRequest *)request;
 - (void)requestFailed:(XLBaseRequest *)request;
 - (void)clearRequest;
 
 @end
 
-#pragma mark - XLRequestAccessory   请求过程回调
+#pragma mark - XLRequestPlugin  请求过程回调
 
 //插件机制
-@protocol XLRequestAccessory <NSObject>
+@protocol XLRequestPlugin <NSObject>
 
 @optional
 
@@ -93,7 +93,7 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
 @property (nonatomic, copy) XLRequestFailureBlcok failureCompletionBlock;
 
 /** 存放遵循代理的对象，插件 */
-@property (nonatomic, strong) NSMutableArray *requestAccessories;
+@property (nonatomic, strong) NSMutableArray *requestPlugins;
 
 #pragma mark - public
 
@@ -107,16 +107,16 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
 - (void)clearCompletionBlock;
 
 /**
- 添加遵循XLRequestAccessory协议的对象到数组
+ 添加遵循XLRequestPlugin协议的对象到数组
  */
-- (void)addAccessory:(id<XLRequestAccessory>)accessory;
+- (void)addRequestPlugin:(id<XLRequestPlugin>)plugin;
 
 #pragma mark - override for subclass
 
 /**
  请求成功的回调
  */
-- (void)requestCompleteHandler;
+- (void)requestSucceedHandler;
 
 /**
  请求失败的回调
@@ -164,8 +164,29 @@ typedef void (^XLRequestFailureBlcok)(XLBaseRequest *request);
 - (id)treatedDataObject;
 
 /**
- 用于检查Status Code是否正常的方法
+ 是否有加载动画
+ */
+- (BOOL)isLoadingAnimation;
+
+/**
+ 用于检查HTTP Status Code是否正常的方法
  */
 - (BOOL)statusCodeValidator;
+
+/**
+ *  返回的message code 是否正确
+ */
+- (BOOL)isMessageCodeCorrect;
+
+/**
+ *  自定义错误code提示消息，默认提示服务器返回message
+ */
+- (NSString *)customErrorMessage;
+
+/**
+ *  自定义正确成功提示消息
+ */
+- (NSString *)customSuccessMessage;
+
 
 @end

@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "GetListApi.h"
+#import "GetListRequest.h"
 
-@interface ViewController () <XLRequestDelegate, XLRequestAccessory>
+@interface ViewController () <XLRequestDelegate, XLRequestPlugin>
 
 @end
 
@@ -25,16 +25,16 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
-    GetListApi *api = [[GetListApi alloc] initWithCityId:@"1" page:@(_currentPage)];
-    
-    api.delegate = self;
-//    [api addAccessory:self];
-    [api start];
+    GetListRequest *request = [[GetListRequest alloc] initWithCityId:@"1" page:@(_currentPage)];
+    request.delegate = self;
+    [request addRequestPlugin:self];
+    [request start];
     
     _currentPage++;
     
+    
     /*
-    [api startWithCompletionBlockWithSuccess:^(XLBaseRequest *request) {
+    [request startWithCompletionBlockWithSuccess:^(XLBaseRequest *request) {
         XLLog(@"------ %ld --------", request.responseStatusCode);
     } failure:^(XLBaseRequest *request) {
         
@@ -42,20 +42,17 @@
      */
 }
 
-
-
 #pragma mark - XLRequestDelegate
 
-- (void)requestFinished:(XLBaseRequest *)request {
+- (void)requestSucceed:(XLBaseRequest *)request {
     
-    XLLog(@"------ %@ --------", request.responseJSONObject);
 }
 
 - (void)requestFailed:(XLBaseRequest *)request {
 
 }
 
-#pragma mark - XLRequestAccessory
+#pragma mark - XLRequestplugin
 
 - (void)requestWillStart:(id)request {
     XLLog(@"requestWillStart");

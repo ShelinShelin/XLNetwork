@@ -25,7 +25,8 @@
     return sharedInstance;
 }
 
-//取消全部请求
+#pragma mark - 取消全部请求
+
 - (void)cancelAllRequests {
     NSDictionary *copyRecord = [_requestsRecord copy];
     for (NSString *key in copyRecord) {
@@ -34,14 +35,22 @@
     }
 }
 
-//取消某个请求
+#pragma mark - 取消某个请求
+
 - (void)cancelRequest:(XLBaseRequest *)request {
     [request.sessionDataTask cancel];
     [self removeSessionDataTask:request.sessionDataTask];
     [request clearCompletionBlock];
 }
 
+#pragma mark - 发起AFN网络请求
+
 - (void)addRequest:(XLBaseRequest *)request {
+    // 网络不可用
+    if (![XLNetworkPrivate checkNetworkStatus]) {
+        // 提示网络连接失败，请稍后再试！
+        
+    }
     
     //请求方式
     XLRequestMethod method = [request requestMethod];
@@ -78,9 +87,19 @@
     //发起请求
     if (method == XLRequestMethodGet) { //GET
         
+        if (request.isLoadingAnimation) {  // 执行加载动画
+            [self loadingAnimationShow];
+        }
+        
         request.sessionDataTask = [_manager GET:requestUrl parameters:param progress:^(NSProgress * _Nonnull downloadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            XLLog(@"\nSuccess-------------------\n method = GET\n URL = %@%@\n params = %@\n result = %@\n-------------------\n", request.baseUrl, request.requestUrl, request.requestArgument,responseObject);
+            
+            // 隐藏加载动画
+            [self loadingAnimationHiden];
+            
             if (responseObject) {
                 [request setValue:responseObject forKey:@"responseJSONObject"];
                 [request setValue:[XLNetworkPrivate responseObjectToJSONStr:responseObject] forKey:@"responseString"];
@@ -88,14 +107,30 @@
             [self handleRequestResult:task];
 
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            XLLog(@"\nFailure-------------------\n method = GET\n URL = %@%@\n params =%@\n errorCode = %ld\n-------------------\n",request.baseUrl, request.requestUrl, request.requestArgument, (long)request.responseStatusCode);
+            
+            // 隐藏加载动画
+            [self loadingAnimationHiden];
+            
             [self handleRequestResult:task];
             
         }];
     }else if (method == XLRequestMethodPost) {  //POST
         
+        if (request.isLoadingAnimation) {  // 执行加载动画
+            [self loadingAnimationShow];
+        }
+        
         request.sessionDataTask = [_manager POST:requestUrl parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            
+            XLLog(@"\nSuccess-------------------\n method = POST\n URL = %@%@\n params = %@\n result = %@\n-------------------\n", request.baseUrl, request.requestUrl, request.requestArgument,responseObject);
+            
+            // 隐藏加载动画
+            [self loadingAnimationHiden];
+            
             if (responseObject) {
                 [request setValue:responseObject forKey:@"responseJSONObject"];
                 [request setValue:[XLNetworkPrivate responseObjectToJSONStr:responseObject] forKey:@"responseString"];
@@ -103,6 +138,12 @@
             [self handleRequestResult:task];
 
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+            XLLog(@"\nFailure-------------------\n method = POST\n URL = %@%@\n params =%@\n errorCode = %ld\n-------------------\n",request.baseUrl, request.requestUrl, request.requestArgument, (long)request.responseStatusCode);
+            
+            // 隐藏加载动画
+            [self loadingAnimationHiden];
+            
             [self handleRequestResult:task];
             
         }];
@@ -137,7 +178,8 @@
     }
 }
 
-//
+// 处理请求回调结果
+
 - (void)handleRequestResult:(NSURLSessionDataTask *)sessionDataTask {
     //先从字典中取
     NSString *key = [self requestHashKey:sessionDataTask];
@@ -147,21 +189,37 @@
         //验证状态码
         if ([request statusCodeValidator]) {    //请求成功
             
+            if ([request isMessageCodeCorrect]) { // 服务端code正确
+                if (request.customSuccessMessage.length) { // 有自定义成功提示
+                    // HUD
+                }
+            } else { // code error
+                
+                if (!request.customErrorMessage.length ) { // 无自定义错误提示
+                    // HUD code
+                } else {
+                    // HUD request.customErrorMessage
+                    
+                    //HFShowTextHUD
+                }
+            }
+
+            
             //调用动画插件
-            [request accessoriesWillStopCallBack];
-            [request requestCompleteHandler];
+            [request requestPluginWillStopCallBack];
+            [request requestSucceedHandler];
             
             if (request.delegate != nil) {
-                [request.delegate requestFinished:request];
+                [request.delegate requestSucceed:request];
             }
             if (request.successCompletionBlock) {
                 request.successCompletionBlock(request);
             }
             
-            [request accessoriesDidStopCallBack];
+            [request requestPluginDidStopCallBack];
         } else {    //请求失败
             
-            [request accessoriesWillStopCallBack];
+            [request requestPluginWillStopCallBack];
             [request requestFailedHandler];
             
             if (request.delegate != nil) {
@@ -171,7 +229,7 @@
                 request.failureCompletionBlock(request);
             }
             
-            [request accessoriesDidStopCallBack];
+            [request requestPluginDidStopCallBack];
         }
     }
     
@@ -207,5 +265,16 @@
     NSString *key = [NSString stringWithFormat:@"%lu", (unsigned long)[sessionDataTask hash]];
     return key;
 }
+
+#pragma mark - loading animation
+
+- (void)loadingAnimationShow {
+    
+}
+
+- (void)loadingAnimationHiden {
+    
+}
+
 
 @end

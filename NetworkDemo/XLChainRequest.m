@@ -45,7 +45,7 @@
     }
     
     if ([_requestArray count] > 0) {
-        [self accessoriesWillStartCallBack];
+        [self requestPluginWillStartCallBack];
         [self startNextRequest];
         [[XLChainRequestAgent sharedInstance] addChainRequest:self];
     } else {
@@ -54,10 +54,10 @@
 }
 
 - (void)stop {
-    [self accessoriesWillStopCallBack];
+    [self requestPluginWillStopCallBack];
     [self clearRequest];
     [[XLChainRequestAgent sharedInstance] removeChainRequest:self];
-    [self accessoriesDidStopCallBack];
+    [self requestPluginDidStopCallBack];
 }
 
 - (void)addRequest:(XLBaseRequest *)request callback:(ChainCallback)callback {
@@ -95,22 +95,22 @@
     ChainCallback callback = _requestCallbackArray[currentRequestIndex];
     callback(self, request);
     if (![self startNextRequest]) {
-        [self accessoriesWillStopCallBack];
-        if ([_delegate respondsToSelector:@selector(chainRequestFinished:)]) {
-            [_delegate chainRequestFinished:self];
+        [self requestPluginWillStopCallBack];
+        if ([_delegate respondsToSelector:@selector(chainRequestSucceed:)]) {
+            [_delegate chainRequestSucceed:self];
             [[XLChainRequestAgent sharedInstance] removeChainRequest:self];
         }
-        [self accessoriesDidStopCallBack];
+        [self requestPluginDidStopCallBack];
     }
 }
 
 - (void)requestFailed:(XLBaseRequest *)request {
-    [self accessoriesWillStopCallBack];
+    [self requestPluginWillStopCallBack];
     if ([_delegate respondsToSelector:@selector(chainRequestFailed:failedBaseRequest:)]) {
         [_delegate chainRequestFailed:self failedBaseRequest:request];
         [[XLChainRequestAgent sharedInstance] removeChainRequest:self];
     }
-    [self accessoriesDidStopCallBack];
+    [self requestPluginDidStopCallBack];
 }
 
 - (void)clearRequest {
@@ -125,11 +125,11 @@
 
 #pragma mark - Request Accessoies
 
-- (void)addAccessory:(id<XLRequestAccessory>)accessory {
-    if (!self.requestAccessories) {
-        self.requestAccessories = [NSMutableArray array];
+- (void)addRequestPlugin:(id<XLRequestPlugin>)plugin {
+    if (!self.requestPlugins) {
+        self.requestPlugins = [NSMutableArray array];
     }
-    [self.requestAccessories addObject:accessory];
+    [self.requestPlugins addObject:plugin];
 }
 
 @end

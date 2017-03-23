@@ -17,8 +17,6 @@ typedef NS_ENUM(NSInteger, XLNetworkReachabilityStatus) {
     XLNetworkReachabilityNotReachable
 };
 
-
-
 @interface XLNetworkPrivate : NSObject
 
 + (NSString*)responseObjectToJSONStr:(id)object;
@@ -28,30 +26,35 @@ typedef NS_ENUM(NSInteger, XLNetworkReachabilityStatus) {
 + (void)addDoNotBackupAttribute:(NSString *)path;
 
 + (NSString *)appVersionString;
-;
+/**
+ 网络是否可用
+ */
 + (BOOL)checkNetworkStatus;
 
+/**
+ 获取当前网络状态
+ */
 + (XLNetworkReachabilityStatus)currentNetworkStatus;
 
 @end
 
-#pragma mark - YTKBaseRequest 分类
+#pragma mark - XLBaseRequest 分类
 
-@interface XLBaseRequest (RequestAccessory)    //插件机制
+@interface XLBaseRequest (RequestPlugin)    //插件机制
 
-- (void)accessoriesWillStartCallBack;
-- (void)accessoriesWillStopCallBack;
-- (void)accessoriesDidStopCallBack;
+- (void)requestPluginWillStartCallBack;
+- (void)requestPluginWillStopCallBack;
+- (void)requestPluginDidStopCallBack;
 
 @end
 
 #pragma mark - XLChainRequest 分类
 
-@interface XLChainRequest (RequestAccessory)
+@interface XLChainRequest (RequestPlugin)
 
-- (void)accessoriesWillStartCallBack;
-- (void)accessoriesWillStopCallBack;
-- (void)accessoriesDidStopCallBack;
+- (void)requestPluginWillStartCallBack;
+- (void)requestPluginWillStopCallBack;
+- (void)requestPluginDidStopCallBack;
 
 @end
 

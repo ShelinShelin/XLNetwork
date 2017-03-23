@@ -1,14 +1,14 @@
 //
-//  GetListApi.m
+//  GetListRequest
 //  NetworkDemo
 //
 //  Created by Shelin on 16/6/1.
 //  Copyright © 2016年 GreatGate. All rights reserved.
 //
 
-#import "GetListApi.h"
+#import "GetListRequest.h"
 
-@implementation GetListApi {
+@implementation GetListRequest {
     NSString *_cityId;
     NSNumber *_page;
 }

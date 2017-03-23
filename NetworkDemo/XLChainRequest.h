@@ -17,10 +17,9 @@ typedef void (^ChainCallback)(XLChainRequest *chainRequest, XLBaseRequest *baseR
 
 @optional
 
-- (void)chainRequestFinished:(XLChainRequest *)chainRequest;
+- (void)chainRequestSucceed:(XLChainRequest *)chainRequest;
 
 - (void)chainRequestFailed:(XLChainRequest *)chainRequest failedBaseRequest:(XLBaseRequest *)request;
-
 
 @end
 
@@ -29,7 +28,7 @@ typedef void (^ChainCallback)(XLChainRequest *chainRequest, XLBaseRequest *baseR
 
 @property (weak, nonatomic) id<XLChainRequestDelegate> delegate;
 
-@property (nonatomic, strong) NSMutableArray *requestAccessories;
+@property (nonatomic, strong) NSMutableArray *requestPlugins;
 
 /**
  start chain request
@@ -45,7 +44,7 @@ typedef void (^ChainCallback)(XLChainRequest *chainRequest, XLBaseRequest *baseR
 
 - (NSArray *)requestArray;
 
-- (void)addAccessory:(id<XLRequestAccessory>)accessory;
+- (void)addRequestPlugin:(id<XLRequestPlugin>)plugin;
 
 
 @end

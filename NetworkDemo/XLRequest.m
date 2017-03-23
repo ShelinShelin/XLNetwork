@@ -58,7 +58,7 @@
 #pragma mark - For subclass to overwrite
 
 - (NSInteger)cacheTimeInSeconds {
-    return -1;   //默认不缓存 < 0
+    return -1;   //默认不缓存 <= 0
 }
 
 #pragma mark - privite
@@ -188,7 +188,7 @@
     
     XLRequest *strongSelf = self;
     
-    [strongSelf.delegate requestFinished:strongSelf];
+    [strongSelf.delegate requestSucceed:strongSelf];
     
     if (strongSelf.successCompletionBlock) {    //block回调
         strongSelf.successCompletionBlock(strongSelf);
@@ -208,7 +208,7 @@
 #pragma mark - Network Request Delegate
 //请求成功缓存数据
 - (void)requestCompleteHandler {
-    [super requestCompleteHandler];
+    [super requestSucceedHandler];
     [self saveJsonResponseToCacheFile:[super responseJSONObject]];
 }
 

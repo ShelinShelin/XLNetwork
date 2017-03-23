@@ -15,18 +15,18 @@
 #pragma mark - public
 
 - (void)start {
-    [self accessoriesWillStartCallBack];
+    [self requestPluginWillStartCallBack];
     
     [[XLNetworkAgent sharedInstance] addRequest:self];
 }
 
 - (void)stop {
-    [self accessoriesWillStopCallBack];
+    [self requestPluginWillStopCallBack];
     
     self.delegate = nil;
     [[XLNetworkAgent sharedInstance] cancelRequest:self];
     
-    [self accessoriesDidStopCallBack];
+    [self requestPluginDidStopCallBack];
 }
 
 - (void)clearCompletionBlock {
@@ -61,7 +61,7 @@
 /**
  请求成功的回调
  */
-- (void)requestCompleteHandler {
+- (void)requestSucceedHandler {
 
 }
 
@@ -133,17 +133,48 @@
     }
 }
 
+/**
+ 是否有加载动画，默认NO
+ */
+- (BOOL)isLoadingAnimation {
+    return NO;
+}
+
+/**
+ *  返回的message code 是否正确，默认服务器1000为正确code
+ */
+- (BOOL)isMessageCodeCorrect {
+    if ([self.responseJSONObject[@"code"] isEqual:@1000]) {
+        return YES;
+    }
+    return NO;
+}
+
+/**
+ *  自定义错误code提示消息，默认提示服务器返回message
+ */
+- (NSString *)customErrorMessage {
+    return @"";
+}
+
+/**
+ *  自定义正确成功提示消息，默认空字符串
+ */
+- (NSString *)customSuccessMessage {
+    return @"";
+}
+
 - (id)treatedDataObject {
     return self.responseJSONObject;    //默认返回原始数据
 }
 
 #pragma mark - Request Accessoies
 
-- (void)addAccessory:(id <XLRequestAccessory>)accessory {
-    if (!self.requestAccessories) {
-        self.requestAccessories = [NSMutableArray array];
+- (void)addRequestPlugin:(id<XLRequestPlugin>)plugin {
+    if (!self.requestPlugins) {
+        self.requestPlugins = [NSMutableArray array];
     }
-    [self.requestAccessories addObject:accessory];
+    [self.requestPlugins addObject:plugin];
 }
 
 
