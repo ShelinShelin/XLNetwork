@@ -15,7 +15,7 @@
 @property (strong, nonatomic) NSMutableArray *requestArray;
 @property (strong, nonatomic) NSMutableArray *requestCallbackArray;
 @property (assign, nonatomic) NSUInteger nextRequestIndex;
-@property (strong, nonatomic) ChainCallback emptyCallback;
+@property (copy, nonatomic) ChainCallback emptyCallback;
 
 @end
 
