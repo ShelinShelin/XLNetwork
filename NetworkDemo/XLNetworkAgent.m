@@ -95,7 +95,7 @@
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
-            XLLog(@"\n-------------------Success-------------------\n method = GET\n URL = %@%@\n params = %@\n result = %@\n--------------------------------------\n", request.baseUrl, request.requestUrl, request.requestArgument,responseObject);
+            XLLog(@"\n-------------------Success-------------------\n ***Method = GET\n ***URL = %@%@\n ***Params = %@\n ***Result = %@\n--------------------------------------\n", request.baseUrl, request.requestUrl, request.requestArgument,responseObject);
             
             // 隐藏加载动画
             [self loadingAnimationHiden];
@@ -108,7 +108,7 @@
 
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
-            XLLog(@"\n-------------------Failure-------------------\n method = GET\n URL = %@%@\n params =%@\n errorCode = %ld\n--------------------------------------\n",request.baseUrl, request.requestUrl, request.requestArgument, (long)request.responseStatusCode);
+            XLLog(@"\n-------------------Failure-------------------\n ***Method = GET\n ***URL = %@%@\n ***params =%@\n ***ErrorCode = %ld\n--------------------------------------\n",request.baseUrl, request.requestUrl, request.requestArgument, (long)request.responseStatusCode);
             
             // 隐藏加载动画
             [self loadingAnimationHiden];
@@ -126,7 +126,7 @@
             
         } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
-            XLLog(@"\n-------------------Success-------------------\n method = POST\n URL = %@%@\n params = %@\n result = %@\n--------------------------------------\n", request.baseUrl, request.requestUrl, request.requestArgument,responseObject);
+            XLLog(@"\n-------------------Success-------------------\n ***Method = POST\n ***URL = %@%@\n ***Params = %@\n ***Result = %@\n--------------------------------------\n", request.baseUrl, request.requestUrl, request.requestArgument,responseObject);
             
             // 隐藏加载动画
             [self loadingAnimationHiden];
@@ -139,7 +139,7 @@
 
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             
-            XLLog(@"\n-------------------Failure-------------------\n method = POST\n URL = %@%@\n params =%@\n errorCode = %ld\n--------------------------------------\n",request.baseUrl, request.requestUrl, request.requestArgument, (long)request.responseStatusCode);
+            XLLog(@"\n-------------------Failure-------------------\n ***Method = POST\n ***URL = %@%@\n ***Params =%@\n ***ErrorCode = %ld\n--------------------------------------\n",request.baseUrl, request.requestUrl, request.requestArgument, (long)request.responseStatusCode);
             
             // 隐藏加载动画
             [self loadingAnimationHiden];
